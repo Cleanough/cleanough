@@ -667,7 +667,7 @@ export async function deletePostByUserId(id: string, userId: string) {
 }
 
 export async function deletePostsByUserId(userId: string) {
-    const { deletedCount } = await db.collection("posts").deleteOne({
+    const { deletedCount } = await db.collection("posts").deleteMany({
         userId: new ObjectId(userId)
     });
     return deletedCount;

@@ -3,8 +3,8 @@ import { deleteCommentReacts } from "@/server/db/queries/commentReact";
 
 export async function deleteCommentService(commentId: string, userId: string) {
     const comment = await deleteCommentByUserId(commentId, userId);
-    if (comment.deletedCount) {
+    if (comment) {
         await deleteCommentReacts(commentId);
     }
-    return comment.deletedCount;
+    return comment;
 }

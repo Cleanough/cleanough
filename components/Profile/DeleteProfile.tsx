@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { SpinnerIcon } from "@/components/Icons";
 import { destroyUser } from "@/lib/requests/user";
 import { signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 export default function DeleteProfile() {
     const [isLoading, setIsLoading] = useState(false);
@@ -14,11 +15,16 @@ export default function DeleteProfile() {
             setIsLoading(false);
             return;
         }
+        const loadingToast = toast.loading("Deleting...")
         try {
             await destroyUser();
             await signOut();
+            toast.dismiss(loadingToast);
+            toast.success("Deleted")
         } catch (e) {
-            alert(e);
+            toast.dismiss(loadingToast);
+            if (typeof e == "string")
+                toast.error(e);
         }
         setIsLoading(false);
     }

@@ -33,3 +33,14 @@ export async function deleteFollowing(userId: string, topic: string) {
         return null;
     }
 }
+
+export async function deleteFollowingsByUserId(userId: string){
+    try {
+        const { deletedCount } = await db.collection("followings").deleteMany({
+            userId: new ObjectId(userId),
+        });
+        return deletedCount;
+    } catch (error) {
+        return null;
+    }
+}

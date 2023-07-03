@@ -99,5 +99,5 @@ export async function DELETE(request: CustomNextRequest) {
 
     const user = await deleteUserService(request.user.id);
 
-    return response.json(user);
+    return response.json({user});
 }

@@ -10,7 +10,7 @@ import { deletePostBookmarks } from "@/server/db/queries/bookmark";
 
 export async function deletePostService(postId: string, userId: string) {
     const post = await deletePostByUserId(postId, userId);
-    if (!post.deletedCount) {
+    if (!post) {
         return 0;
     }
 
@@ -27,5 +27,5 @@ export async function deletePostService(postId: string, userId: string) {
         await deleteCommentsReacts(commentsId);
     }
 
-    return post.deletedCount;
+    return post;
 }

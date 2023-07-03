@@ -32,7 +32,7 @@ export async function deletePostBookmarks(postId: string) {
 }
 
 export async function deleteBookmarksByUserId(userId: string) {
-    const { deletedCount } = await db.collection("bookmarks").deleteOne({
+    const { deletedCount } = await db.collection("bookmarks").deleteMany({
         userId: new ObjectId(userId)
     });
     return deletedCount;

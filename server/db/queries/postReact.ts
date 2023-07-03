@@ -46,14 +46,14 @@ export async function deletePostReact(postId: string, userId: string) {
 }
 
 export async function deletePostReactsByUserId(userId: string) {
-    const { deletedCount } = await db.collection("postReacts").deleteOne({
+    const { deletedCount } = await db.collection("postReacts").deleteMany({
         userId: new ObjectId(userId)
     });
     return deletedCount;
 }
 
 export async function deletePostReacts(postId: string) {
-    const { deletedCount } = await db.collection("postReacts").deleteOne({
+    const { deletedCount } = await db.collection("postReacts").deleteMany({
         postId: new ObjectId(postId)
     });
     return deletedCount;

@@ -110,7 +110,7 @@ export async function deleteCommentByUserId(commentId: string, userId: string) {
 }
 
 export async function deleteCommentsByUserId(userId: string) {
-    const { deletedCount } = await db.collection("comments").deleteOne({
+    const { deletedCount } = await db.collection("comments").deleteMany({
         userId: new ObjectId(userId)
     });
     return deletedCount;
