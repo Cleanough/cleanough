@@ -33,12 +33,7 @@ export default function SignUp() {
         setIsLoading(true);
         try {
             await SignUpUser(data);
-            reset({
-                username: "",
-                email: "",
-                password: "",
-                confirmPassword: ""
-            });
+            
             const response = await signIn("credentials", {
                 email: data.email,
                 password: data.password,
