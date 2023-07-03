@@ -63,7 +63,7 @@ export async function POST(request: CustomNextRequest, { params }: Params) {
         html: render(<ForgotPasswordTemplate token={token} />)
     };
 
-    await transporter.sendMail(mailOptions, (error: any, info: any) => {
+    transporter.sendMail(mailOptions, (error: any, info: any) => {
         if (error) {
             return response.json(
                 { error: status[status.BAD_GATEWAY] },
@@ -73,7 +73,7 @@ export async function POST(request: CustomNextRequest, { params }: Params) {
                 }
             );
         }
-        return NextResponse.json({ route: "test"});
+        console.log(info)
     });
-
+    return NextResponse.json({ route: "Forgot Password"});
 }
