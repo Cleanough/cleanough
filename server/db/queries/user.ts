@@ -102,10 +102,8 @@ export async function registerVerifiedProviderUser(user: {
 export async function addSuperAdmin() {
     const password = await bcrypt.hash(process.env.SEED_ADMIN_PASS!, 10);
     const user = {
-        firstName: "Super",
-        lastName: "Admin",
         email: process.env.SEED_ADMIN_EMAIL,
-        username: "superadmin@cleanough.com",
+        username: process.env.SEED_ADMIN_USERNAME,
         password,
         role: "admin",
         emailVerified: new Date()
