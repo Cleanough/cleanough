@@ -40,6 +40,7 @@ export default function Post({ post }: PostProps) {
         try {
             await addOrRemovePostReact(post._id, "upvote");
         } catch (e) {
+            toast.error("Unauthorized");
             if (e == status[status.UNAUTHORIZED]) router.push("/auth/signin");
         }
         await mutate(`/api/post/${post._id}/react/check`);
@@ -50,6 +51,7 @@ export default function Post({ post }: PostProps) {
         try {
             await addOrRemovePostReact(post._id, "downvote");
         } catch (e) {
+            toast.error("Unauthorized");
             if (e == status[status.UNAUTHORIZED]) router.push("/auth/signin");
         }
         await mutate(`/api/post/${post._id}/react/check`);

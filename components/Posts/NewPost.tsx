@@ -41,15 +41,17 @@ export default function NewPost() {
         setIsDisabled(true);
         try {
             await addPost({ tabs });
+            toast.dismiss(loadingToast);
+            toast.success("Created");
         } catch (e) {
+            toast.dismiss(loadingToast);
+            toast.error("Unauthorized");
             if (e == status[status.UNAUTHORIZED]) router.push("/auth/signin");
         }
         setTabs([]);
         setActiveTab(undefined);
         setCreateNewPost(false);
         await mutatePost();
-        toast.dismiss(loadingToast);
-        toast.success("Created");
         showFullScreen && setShowFullScreen(false);
     }
 

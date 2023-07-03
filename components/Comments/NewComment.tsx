@@ -12,7 +12,7 @@ import { addComment } from "@/lib/requests/comment";
 import { mutate } from "swr";
 import { usePostUtilsContext } from "@/components/Provider";
 import status from "http-status";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 
 type Tab = {
@@ -43,6 +43,7 @@ export default function NewComment({
     );
     const [showDiff, setShowDiff] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
+    const router = useRouter();
 
     const { mutatePost } = usePostUtilsContext();
 
@@ -70,13 +71,15 @@ export default function NewComment({
         setIsDisabled(true);
         try {
             await addComment(post._id, { tabs });
+            toast.dismiss(loadingToast);
+            toast.success("Created");
         } catch (e) {
-            if (e == status[status.UNAUTHORIZED]) redirect("/auth/signin");
+            toast.dismiss(loadingToast);
+            toast.error("Unauthorized");
+            if (e == status[status.UNAUTHORIZED]) router.push("/auth/signin");
         }
         await mutate(`/api/post/${post._id}/comment?page=0`);
         await mutatePost();
-        toast.dismiss(loadingToast);
-        toast.success("Created");
         setTabs([]);
         discardNewComment();
     }

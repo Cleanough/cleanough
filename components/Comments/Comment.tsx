@@ -68,6 +68,7 @@ export default function Comment({
         try {
             await addOrRemoveCommentReact(post?._id, comment._id, "upvote");
         } catch (e) {
+            toast.error("Unauthorized");
             if (e == status[status.UNAUTHORIZED]) router.push("/auth/signin");
         }
         await mutate(`/api/post/${post?._id}/comment?page=${commentCount - 1}`);
@@ -80,6 +81,7 @@ export default function Comment({
         try {
             await addOrRemoveCommentReact(post?._id, comment._id, "downvote");
         } catch (e) {
+            toast.error("Unauthorized");
             if (e == status[status.UNAUTHORIZED]) router.push("/auth/signin");
         }
         await mutate(`/api/post/${post?._id}/comment?page=${commentCount - 1}`);
