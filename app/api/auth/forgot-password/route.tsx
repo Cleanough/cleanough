@@ -38,7 +38,6 @@ export async function POST(request: CustomNextRequest, { params }: Params) {
     if (res) return res;
 
     const user = await getUserByEmail(body.email);
-    return response.json({user})
     if (user) request.user = user;
     else return response.json({});
 
@@ -73,6 +72,9 @@ export async function POST(request: CustomNextRequest, { params }: Params) {
                     statusText: status[status.BAD_GATEWAY]
                 }
             );
+        }
+        else {
+            return response.json({info})
         }
     });
     return NextResponse.json({ route: "Forgot Password"});
