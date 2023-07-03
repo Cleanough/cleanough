@@ -40,7 +40,7 @@ export default function SignUp() {
                 confirmPassword: ""
             });
             const response = await signIn("credentials", {
-                username: data.username,
+                email: data.email,
                 password: data.password,
                 redirect: false
             });
