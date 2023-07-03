@@ -73,6 +73,7 @@ export async function POST(request: CustomNextRequest, { params }: Params) {
                 }
             );
         }
+        console.log(info)
     });
 
     return NextResponse.json({ route: "forgot password" });
