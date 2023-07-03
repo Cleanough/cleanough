@@ -17,7 +17,7 @@ export default function UserProfile({
     user
 }: UserProfileProps) {
     return (
-        <div className="w-min mx-auto">
+        <div className="w-full sm:w-min mx-auto">
             <div className="w-full sm:w-[582px] rounded-lg shadow p-4 border bg-white relative mt-16 mb-4">
                 <div className="h-24 w-24 rounded-full bg-[#2e2e2e] flex justify-center items-center text-white text-3xl font-bold select-none absolute -top-12 left-1/2 -translate-x-1/2">
                     {user?.username && user?.username[0]}

@@ -33,7 +33,7 @@ export default function Posts({ type, username }: PostsProps) {
     if (posts?.length == 0) {
         return (
             <PostUtilsProvider type={type} mutatePost={mutate}>
-                <NewPost />
+                {type === "feed" && <NewPost />}
                 <div>No Post Found</div>
             </PostUtilsProvider>
         );
