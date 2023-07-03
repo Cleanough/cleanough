@@ -21,6 +21,7 @@ cp .env.example .env
 Here are the default admin email and password that will be seeded into the database, but these can be changed in the .env file.
 ```env
 SUPER_ADMIN_EMAIL=admin@cleanough.com
+SUPER_ADMIN_USERNAME=admin
 SUPER_ADMIN_PASSWORD=admin
 ```
 Start the development server:
