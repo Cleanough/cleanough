@@ -72,7 +72,7 @@ export default function SignIn() {
                                 },
                                 pattern: {
                                     value: /\S+@\S+\.\S+/,
-                                    message: "Include @ in email address"
+                                    message: "Invalid email address"
                                 }
                             })}
                             // required
