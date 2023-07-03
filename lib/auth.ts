@@ -8,6 +8,7 @@ import { verifyPassword } from "@/server/utils/auth";
 import { database } from "@/server/middlewares";
 import {
     getUserByEmail,
+    getUserByUsername,
     registerVerifiedProviderUser
 } from "@/server/db/queries/user";
 
@@ -88,11 +89,15 @@ export const authOptions: AuthOptions = {
 
             if (existingUser) return true;
 
-            const username = profile?.email?.split("@")[0] as string;
+            let username = profile?.email?.split("@")[0] as string;
+
+            if (await getUserByUsername(username)) {
+                username +=
+                    Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+            }
+
             const user = await registerVerifiedProviderUser({
-                username: (username +
-                    Math.floor(Math.random() * (999999 - 100000 + 1)) +
-                    100000) as string,
+                username: username,
                 email: profile?.email as string,
                 role: "user"
             });
