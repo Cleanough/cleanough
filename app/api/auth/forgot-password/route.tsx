@@ -38,6 +38,7 @@ export async function POST(request: CustomNextRequest, { params }: Params) {
     if (res) return res;
 
     const user = await getUserByEmail(body.email);
+    return response.json({user})
     if (user) request.user = user;
     else return response.json({});
 
