@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                username: { label: "Username", type: "text" },
+                email: { label: "email", type: "email" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
@@ -27,13 +27,13 @@ export const authOptions: AuthOptions = {
                     throw new Error("Too Many Requests");
                 }
 
-                const { username, password } = credentials!;
-                if (!username || !password) {
+                const { email, password } = credentials!;
+                if (!email || !password) {
                     throw new Error("Bad Request");
                 }
 
                 const user = await db.collection("users").findOne({
-                    username
+                    email
                 });
 
                 if (!user) throw new Error("Invalid Credentials");

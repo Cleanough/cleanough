@@ -110,6 +110,10 @@ export default function SignUp() {
                                 maxLength: {
                                     value: 20,
                                     message: "Max length is 20"
+                                },
+                                pattern: {
+                                    value: /\S+@\S+\.\S+/,
+                                    message: "Include @ in email address"
                                 }
                             })}
                             // required

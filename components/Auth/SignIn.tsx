@@ -1,14 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { SpinnerIcon } from "@/components/Icons";
 import toast from "react-hot-toast";
 import { ApplicationLogo } from "@/components/Application";
 
 type Inputs = {
-    username: string;
+    email: string;
     password: string;
 };
 
@@ -16,17 +16,15 @@ export default function SignIn() {
     const {
         register,
         handleSubmit,
-        setError,
-        watch,
         formState: { errors }
     } = useForm<Inputs>();
     const [isLoading, setIsLoading] = useState(false);
-    const { data: session } = useSession();
+
     async function onSubmit(data: Inputs) {
         setIsLoading(true);
 
         const response = await signIn("credentials", {
-            username: data.username,
+            email: data.email,
             password: data.password,
             redirect: false
         });
@@ -63,22 +61,26 @@ export default function SignIn() {
                 >
                     <div>
                         <label className="block text-sm font-medium leading-6 text-gray-900">
-                            Username
+                            Email
                         </label>
                         <input
                             type="text"
-                            {...register("username", {
+                            {...register("email", {
                                 required: {
                                     value: true,
                                     message: "This field is required"
+                                },
+                                pattern: {
+                                    value: /\S+@\S+\.\S+/,
+                                    message: "Include @ in email address"
                                 }
                             })}
                             // required
                             className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         />
-                        {errors.username?.type && (
+                        {errors.email?.type && (
                             <p className="text-red-500 text-sm mt-1">
-                                {errors.username.message}
+                                {errors.email.message}
                             </p>
                         )}
                     </div>
