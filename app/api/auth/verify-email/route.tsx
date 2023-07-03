@@ -45,17 +45,7 @@ export async function POST(request: CustomNextRequest) {
         html: render(<VerifyEmailTemplate token={token} />)
     };
 
-    transporter.sendMail(mailOptions, (error: any, info: any) => {
-        if (error) {
-            return response.json(
-                { error: status[status.BAD_GATEWAY] },
-                {
-                    status: status.BAD_GATEWAY,
-                    statusText: status[status.BAD_GATEWAY]
-                }
-            );
-        }
-    });
+    const info = await transporter.sendMail(mailOptions);
 
-    return response.json({ info: "250 2.0.0 Ok" });
+    return response.json({ info });
 }
