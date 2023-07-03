@@ -20,7 +20,6 @@ export default function EditProfile() {
         handleSubmit,
         setError,
         setValue,
-        watch,
         formState: { errors }
     } = useForm<Inputs>();
     const [isLoading, setIsLoading] = useState(false);
@@ -55,14 +54,14 @@ export default function EditProfile() {
     }
 
     return (
-        <div className="sm:w-min mx-auto">
+        <div className="w-full sm:w-min mx-auto">
             <div className="w-full sm:w-[582px] rounded-lg shadow p-4 border bg-white relative">
                 <h1 className="text-base font-semibold leading-7 text-gray-900">
                     Edit Profile
                 </h1>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="mt-2 grid grid-cols-2 gap-x-4 gap-y-2"
+                    className="mt-2 grid sm:grid-cols-2 gap-x-4 gap-y-2"
                 >
                     <div>
                         <label className="block text-sm font-medium leading-6 text-gray-900">

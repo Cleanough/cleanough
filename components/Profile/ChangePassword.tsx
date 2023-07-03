@@ -48,14 +48,14 @@ export default function ChangePassword() {
     }
 
     return (
-        <div className="sm:w-min mx-auto">
+        <div className="w-full sm:w-min mx-auto">
             <div className="w-full sm:w-[582px] rounded-lg shadow p-4 border bg-white relative">
                 <h1 className="text-base font-semibold leading-7 text-gray-900">
                     Change Password
                 </h1>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="mt-2 grid grid-cols-2 gap-y-2 gap-x-4"
+                    className="mt-2 grid sm:grid-cols-2 gap-y-2 gap-x-4"
                 >
                     <div>
                         <label className="block text-sm font-medium leading-6 text-gray-900 required-input">
