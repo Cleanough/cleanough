@@ -20,7 +20,7 @@ export default function SearchedUser() {
 
     return (
         <div>
-            <div className="w-min mx-auto">
+            <div className="w-full sm:w-min mx-auto">
                 <div className="w-full sm:w-[582px] rounded-lg shadow p-4 border bg-white relative mt-4 mb-4">
                     <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                         <div className="flex items-center gap-x-2 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
@@ -53,7 +53,7 @@ export default function SearchedUser() {
                 </div>
             </div>
             {users && (
-                <div className="w-min mx-auto space-y-4">
+                <div className="w-full sm:w-min mx-auto space-y-4">
                     {users.map((user: any) => (
                         <div
                             key={user._id}

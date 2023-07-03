@@ -16,7 +16,7 @@ export default function Topics() {
     }, [followings]);
 
     return (
-        <div className="w-min mx-auto space-y-4 mt-4">
+        <div className="w-full sm:w-min mx-auto space-y-4 mt-4">
             {Languages.map((language) => (
                 <Topic
                     key={language.name}

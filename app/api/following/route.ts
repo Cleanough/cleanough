@@ -76,7 +76,7 @@ export async function DELETE(request: CustomNextRequest, { params }: Params) {
     const response = NextResponse;
     const { searchParams, error } = validate(
         request,
-        await request.json(),
+        await getRequestBody(request),
         params,
         {
             searchParamsSchema: topicSchema
