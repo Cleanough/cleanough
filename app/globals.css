@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: #000000;
+    --background-rgb: #f8f9fa;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+    color: var(--foreground-rgb);
+    background: var(--background-rgb);
+}
+
+label.required-input::after {
+    content: "*";
+    color: #dc2626;
+    font-size: 14px;
+    padding-left: 2px;
+}
