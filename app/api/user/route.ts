@@ -1,5 +1,5 @@
 import { use } from "@/server";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {
     database,
     roleAuthorization,
@@ -18,7 +18,7 @@ import status from "http-status";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { getRequestBody } from "@/server/utils/body";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: CustomNextRequest) {
     const response = NextResponse;
 
     const res = await use(request, response, [
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
     const search = request.nextUrl.searchParams.get("search");
 
-    const users = await findUser(search as string);
+    const users = await findUser(search as string, request.user.id);
 
     return response.json(users);
 }
@@ -99,5 +99,5 @@ export async function DELETE(request: CustomNextRequest) {
 
     const user = await deleteUserService(request.user.id);
 
-    return response.json({user});
+    return response.json({ user });
 }

@@ -136,7 +136,7 @@ export async function deleteUser(id: string) {
     return deletedCount;
 }
 
-export async function findUser(search: string) {
+export async function findUser(search: string, userId: string) {
     const searchTerms = search.split(" ");
 
     const regexArray = searchTerms.map((term) => ({
@@ -150,7 +150,13 @@ export async function findUser(search: string) {
     return await db
         .collection("users")
         .find(
-            { $and: regexArray },
+            {
+                $and: [
+                    { $or: regexArray },
+                    { _id: { $ne: new ObjectId(userId) } },
+                    { role: { $ne: "admin" } }
+                ]
+            },
             {
                 projection: {
                     createdAt: 0,
