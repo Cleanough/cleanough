@@ -31,13 +31,12 @@ async function createIndexes() {
         db
             .collection("followings")
             .createIndex({ userId: 1, topic: 1 }, { unique: true }),
-        db
-            .collection("users")
-            .createIndex({
-                username: "text",
-                firstName: "text",
-                lastName: "text"
-            })
+        db.collection("topics").createIndex({ name: 1 }, { unique: true }),
+        db.collection("users").createIndex({
+            username: "text",
+            firstName: "text",
+            lastName: "text"
+        })
     ]);
 
     indexesCreated = true;

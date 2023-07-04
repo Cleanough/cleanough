@@ -3,6 +3,7 @@ import { usePosts } from "@/lib/hooks/post";
 import { PostUtilsProvider } from "@/components/Provider";
 import { NewPost, Post } from "@/components/Posts/index";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type PostsProps = {
     type: string;
@@ -34,7 +35,17 @@ export default function Posts({ type, username }: PostsProps) {
         return (
             <PostUtilsProvider type={type} mutatePost={mutate}>
                 {type === "feed" && <NewPost />}
-                <div>No Post Found</div>
+                {type === "feed" ? (
+                    <div>
+                        Follow{" "}
+                        <Link href="/topic" className="underline">
+                            Topics
+                        </Link>{" "}
+                        to get related posts
+                    </div>
+                ) : (
+                    <div>No Post Found</div>
+                )}
             </PostUtilsProvider>
         );
     }
