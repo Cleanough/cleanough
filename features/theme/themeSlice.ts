@@ -1,7 +1,7 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "@/store";
-import { THEME_VALUES } from "../../constants";
+import { THEME_VALUES } from "@/constants";
 
 // Define a type for the slice state
 interface ThemeName {
