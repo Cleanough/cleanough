@@ -4,6 +4,7 @@ import { PostUtilsProvider } from "@/components/Provider";
 import { NewPost, Post } from "@/components/Posts/index";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { SpinnerIcon } from "../Icons";
 
 type PostsProps = {
     type: string;
@@ -19,6 +20,7 @@ export default function Posts({ type, username }: PostsProps) {
     );
     const [posts, setPosts] = useState<any[]>();
     const [loadMore, setLoadMore] = useState(true);
+    const [loadingPosts, setLoadingPosts] = useState(false);
 
     useEffect(() => {
         if (
@@ -34,9 +36,8 @@ export default function Posts({ type, username }: PostsProps) {
         if (
             data &&
             data.length > 1 &&
-            (data[data.length - 1].length < PER_PAGE ||
-                data[data.length - 1].length - data[data.length - 2].length <
-                    PER_PAGE)
+            data[data.length - 1].length - data[data.length - 2].length <
+                PER_PAGE
         ) {
             setLoadMore(false);
         }
@@ -63,6 +64,12 @@ export default function Posts({ type, username }: PostsProps) {
         );
     }
 
+    async function handleLoadMore() {
+        setLoadingPosts(true);
+        await setSize(size + 1);
+        setLoadingPosts(false);
+    }
+
     return (
         <PostUtilsProvider type={type} mutatePost={mutate}>
             {type === "feed" && <NewPost />}
@@ -72,10 +79,11 @@ export default function Posts({ type, username }: PostsProps) {
             {loadMore && (
                 <div>
                     <button
-                        onClick={() => setSize(size + 1)}
+                        onClick={handleLoadMore}
+                        disabled={loadingPosts}
                         className="flex items-center justify-center gap-x-2 py-2 px-4 bg-gray-100 text-sm duration-150 hover:bg-gray-200 active:bg-gray-200 rounded-lg md:inline-flex"
                     >
-                        Load More
+                        {loadingPosts ? <SpinnerIcon />: <span>Load More</span>}
                     </button>
                 </div>
             )}
