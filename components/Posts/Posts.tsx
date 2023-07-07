@@ -10,6 +10,8 @@ type PostsProps = {
     username?: string;
 };
 
+const PER_PAGE = 3;
+
 export default function Posts({ type, username }: PostsProps) {
     const { data, error, isLoading, size, setSize, mutate } = usePosts(
         type,
@@ -19,14 +21,23 @@ export default function Posts({ type, username }: PostsProps) {
     const [loadMore, setLoadMore] = useState(true);
 
     useEffect(() => {
-        const posts = data?.flat();
         if (
             data &&
             data.length > 1 &&
-            data[data?.length - 1].length == data[data?.length - 2].length
+            data[data.length - 1].length === data[data.length - 2].length
         )
             setLoadMore(false);
-        else setPosts(posts);
+        else {
+            data && setPosts(data[data?.length - 1]);
+        }
+
+        if (
+            data &&
+            data.length > 1 &&
+            data[data.length - 1].length - data[data.length - 2].length < PER_PAGE
+        ) {
+            setLoadMore(false);
+        }
     }, [data]);
 
     if (isLoading) return <div>Loading...</div>;
