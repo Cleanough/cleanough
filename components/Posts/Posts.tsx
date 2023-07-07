@@ -34,7 +34,9 @@ export default function Posts({ type, username }: PostsProps) {
         if (
             data &&
             data.length > 1 &&
-            data[data.length - 1].length - data[data.length - 2].length < PER_PAGE
+            (data[data.length - 1].length < PER_PAGE ||
+                data[data.length - 1].length - data[data.length - 2].length <
+                    PER_PAGE)
         ) {
             setLoadMore(false);
         }
